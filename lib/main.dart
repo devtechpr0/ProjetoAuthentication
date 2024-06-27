@@ -18,9 +18,16 @@ class TelaAutenticacao extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 15,
-                height: 15,
+                padding: const EdgeInsets.all(65),
+                width: 200,
+                height: 200,
                 color: Colors.deepPurple,
+                child: const Text(
+                  'Aqui vai uma imagem.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
               ),
               const Text('Testando a centralização'),
             ],
