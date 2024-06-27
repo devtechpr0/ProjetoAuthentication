@@ -1,6 +1,6 @@
 # Projeto_Authentication
 
-Projeto onde será feito uma tela de autenticação utilizando Fluter em conjunto ao Firebase Authentication.
+Projeto onde será feito uma tela de autenticação utilizando Flutter em conjunto ao Firebase Authentication.
 
 ## Começando...
 
