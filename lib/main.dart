@@ -29,7 +29,14 @@ class TelaAutenticacao extends StatelessWidget {
                       color: Colors.white, fontStyle: FontStyle.italic),
                 ),
               ),
-              const Text('Testando a centralização'),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text('Campo 1 pra digitar usuário'),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text('Campo 2 pra digitar senha')
             ],
           ),
         ),
