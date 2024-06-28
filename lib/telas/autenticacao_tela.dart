@@ -18,6 +18,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       body: Stack(
         children: [
           Container(
+            // Colocar efeito gradiente em um Container
             decoration: const BoxDecoration(
                 gradient: RadialGradient(radius: 1, colors: [
               MyColors.gradUm,
@@ -26,8 +27,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(30.0),
+            //Widget necessário para criar formularios
             child: Form(
               child: Center(
+                // Widget para poder dar scroll na tela
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -47,6 +50,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                           ],
                         ),
                       ),
+                      // Widget para esconder ou mostrar algo (necessário um controle)
                       Visibility(
                         visible: !queroEntrar,
                         child: Column(
@@ -108,7 +112,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                     ),
                                   ),
                                   const SizedBox(height: 16),
+                                  // Formularios/Input do Usuário
                                   TextFormField(
+                                    textAlign: TextAlign.center,
                                     decoration:
                                         getAuthenticationInputDecoration(
                                             'Nome'),
@@ -132,7 +138,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
-                        decoration: getAuthenticationInputDecoration('E-mail'),
+                        textAlign: TextAlign.center,
+                        decoration: getAuthenticationInputDecoration(
+                            'exemplo@email.com.br'),
                       ),
                       const SizedBox(
                         height: 16,
@@ -147,7 +155,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
-                        decoration: getAuthenticationInputDecoration('Senha'),
+                        textAlign: TextAlign.center,
+                        decoration:
+                            getAuthenticationInputDecoration('***********'),
                         obscureText: true,
                       ),
                       const SizedBox(
@@ -167,6 +177,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                               ),
                               const SizedBox(height: 16),
                               TextFormField(
+                                textAlign: TextAlign.center,
                                 decoration: getAuthenticationInputDecoration(
                                     'Confirme Senha'),
                                 obscureText: true,
@@ -177,11 +188,18 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                         height: 16,
                       ),
                       ElevatedButton(
-                        style: const ButtonStyle(
-                            fixedSize: WidgetStatePropertyAll(
+                        style: ButtonStyle(
+                            //Mexer na borda do ElevatedButton
+                            shape: WidgetStatePropertyAll(
+                                // Tipo da borda
+                                ContinuousRectangleBorder(
+                                    // Aqui mexe no raio
+                                    borderRadius: BorderRadius.circular(15))),
+                            fixedSize: const WidgetStatePropertyAll(
                                 Size(double.infinity, 65)),
-                            backgroundColor: WidgetStatePropertyAll<Color>(
-                                MyColors.azulEscuro)),
+                            backgroundColor:
+                                const WidgetStatePropertyAll<Color>(
+                                    MyColors.azulEscuro)),
                         onPressed: () {},
                         child: Text(
                           (queroEntrar) ? 'Entrar' : 'Cadastrar',

@@ -10,4 +10,5 @@ class MyColors {
   static const Color cinzaEscuro = Color(0xFF8f8e8e);
   static const Color cinzaClaro = Color(0xFFececec);
   static const Color branco = Color(0xFFffffff);
+  static const Color verde = Color(0xFF00bf63);
 }
