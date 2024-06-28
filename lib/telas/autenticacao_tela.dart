@@ -57,7 +57,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   ),
                   TextFormField(
                     decoration: const InputDecoration(
-                      label: Text('example@email.com'),
+                      label: Text('examplo@email.com.br'),
                     ),
                   ),
                   const SizedBox(
