@@ -11,6 +11,9 @@ class AuthenticationScreen extends StatefulWidget {
 
 class _AuthenticationScreenState extends State<AuthenticationScreen> {
   bool queroEntrar = true;
+  final _formKey = GlobalKey<FormState>();
+  String _pass = 'Teste';
+  bool verSenha = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             padding: const EdgeInsets.all(30.0),
             //Widget necessário para criar formularios
             child: Form(
+              key:
+                  _formKey, //chave necessária para validação do formulario na hora que pressonar o botão
               child: Center(
                 // Widget para poder dar scroll na tela
                 child: SingleChildScrollView(
@@ -81,13 +86,13 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                   });
                                 },
                                 child: const Text(
-                                  'Já possui Cadastro? Entrar aqui..',
+                                  'Já possui Cadastro? Entrar aqui...',
                                   style: TextStyle(
                                     color: MyColors.branco,
                                   ),
                                 )),
                             const SizedBox(
-                              height: 100,
+                              height: 75,
                             ),
                           ],
                         ),
@@ -118,6 +123,22 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                     decoration:
                                         getAuthenticationInputDecoration(
                                             'Nome'),
+                                    //Validação do campo Nome
+                                    validator: (String? value) {
+                                      //Se o campo estiver vazio
+                                      if (value == null) {
+                                        return '*Campo Obrigatório';
+                                      }
+                                      if (value.isEmpty) {
+                                        return '*Campo Obrigatório!';
+                                      }
+                                      //Nome curto
+                                      else if (value.length < 3) {
+                                        return 'Nome ou Apelido curto';
+                                      }
+                                      //Se estiver tudo certo
+                                      return null;
+                                    },
                                   ),
                                 ],
                               )
@@ -141,6 +162,24 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                         textAlign: TextAlign.center,
                         decoration: getAuthenticationInputDecoration(
                             'exemplo@email.com.br'),
+                        //Validação do campo e-mail
+                        validator: (String? value) {
+                          //Se o campo estiver vazio
+                          if (value == null) {
+                            return '*Campo Obrigatório!';
+                          }
+                          if (value.isEmpty) {
+                            return '*Campo Obrigatório!';
+                          }
+                          //Sem o @ e espaço
+                          if (!value.contains('@') ||
+                              value.length < 2 ||
+                              value.contains(' ')) {
+                            return 'E-mail inválido';
+                          }
+                          //Se estiver tudo certo
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 16,
@@ -154,11 +193,40 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 fontWeight: FontWeight.bold)),
                       ),
                       const SizedBox(height: 16),
-                      TextFormField(
-                        textAlign: TextAlign.center,
-                        decoration:
-                            getAuthenticationInputDecoration('***********'),
-                        obscureText: true,
+                      Stack(
+                        alignment: const Alignment(0.95, 0),
+                        children: [
+                          TextFormField(
+                            textAlign: TextAlign.center,
+                            decoration:
+                                getAuthenticationInputDecoration('***********'),
+                            //Validação da senha ??
+                            validator: (String? value) {
+                              _pass = value.toString();
+                              //Se o campo estiver vazio
+                              if (value == null) {
+                                return '*Campo  Obrigatório';
+                              } else if //E-mail curto
+                                  (value.length < 4) {
+                                return 'Senha curta';
+                              } else if (value.contains(' ')) {
+                                return 'Espaço não é aceito';
+                              }
+                              //Se estiver tudo certo
+                              return null;
+                            },
+                            obscureText: verSenha,
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.remove_red_eye_rounded,
+                              color: MyColors.cinzaEscuro,
+                            ),
+                            onPressed: () => setState(() {
+                              verSenha = !verSenha;
+                            }),
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 16,
@@ -180,12 +248,23 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 textAlign: TextAlign.center,
                                 decoration: getAuthenticationInputDecoration(
                                     'Confirme Senha'),
+                                validator: (String? value) {
+                                  //Se o campo estiver vazio
+                                  if (value == null) {
+                                    return 'O e-mail não pode ser vazio';
+                                  } else if //Senha não diferente
+                                      (value != _pass) {
+                                    return 'Senhas Diferentes';
+                                  }
+                                  //Se estiver tudo certo
+                                  return null;
+                                },
                                 obscureText: true,
                               ),
                             ],
                           )),
                       const SizedBox(
-                        height: 16,
+                        height: 32,
                       ),
                       ElevatedButton(
                         style: ButtonStyle(
@@ -200,7 +279,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                             backgroundColor:
                                 const WidgetStatePropertyAll<Color>(
                                     MyColors.azulEscuro)),
-                        onPressed: () {},
+                        onPressed: () {
+                          botaoPrincipalClicado();
+                        },
                         child: Text(
                           (queroEntrar) ? 'Entrar' : 'Cadastrar',
                           style: const TextStyle(
@@ -241,5 +322,13 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         ],
       ),
     );
+  }
+
+  botaoPrincipalClicado() {
+    if (_formKey.currentState!.validate()) {
+      print('Tudo Certo');
+    } else {
+      print('Algo errado');
+    }
   }
 }
