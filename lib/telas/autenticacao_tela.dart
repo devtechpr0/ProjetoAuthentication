@@ -251,8 +251,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 validator: (String? value) {
                                   //Se o campo estiver vazio
                                   if (value == null) {
-                                    return 'O e-mail não pode ser vazio';
-                                  } else if //Senha não diferente
+                                    return '* Campo Obrigatório';
+                                  } else if //Senha forem diferente
                                       (value != _pass) {
                                     return 'Senhas Diferentes';
                                   }
