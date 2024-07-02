@@ -1,4 +1,4 @@
-# Projeto_Authentication
+# Projeto_Authentication (FLUTTER)
 
 Projeto onde será feito uma tela de autenticação utilizando Flutter em conjunto ao Firebase Authentication.
 
