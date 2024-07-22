@@ -14,6 +14,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   final _formKey = GlobalKey<FormState>();
   String _pass = 'Teste';
   bool verSenha = true;
+  double cordY = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +195,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                       ),
                       const SizedBox(height: 16),
                       Stack(
-                        alignment: const Alignment(0.95, 0),
+                        alignment: AlignmentDirectional(0.95, cordY),
                         children: [
                           TextFormField(
                             textAlign: TextAlign.center,
@@ -208,11 +209,20 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 return '*Campo  Obrigatório';
                               } else if //E-mail curto
                                   (value.length < 4) {
+                                setState(() {
+                                  cordY = -0.75;
+                                });
                                 return 'Senha curta';
                               } else if (value.contains(' ')) {
+                                setState(() {
+                                  cordY = -0.75;
+                                });
                                 return 'Espaço não é aceito';
                               }
                               //Se estiver tudo certo
+                              setState(() {
+                                cordY = 0;
+                              });
                               return null;
                             },
                             obscureText: verSenha,
@@ -259,7 +269,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                   //Se estiver tudo certo
                                   return null;
                                 },
-                                obscureText: true,
+                                obscureText: verSenha,
                               ),
                             ],
                           )),
